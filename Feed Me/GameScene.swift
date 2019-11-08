@@ -1,21 +1,38 @@
 import SpriteKit
 
-
 class GameScene: SKScene {
+    
+    var background: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         //setUpPhysics()
-        //etUpScenery()
+        setUpScenery()
         //setUpPrize()
         //setUpVines()
         //setUpCrocodile()
         //setUpAudio()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
     //MARK: - Level setup
     
     fileprivate func setUpPhysics() { }
-    fileprivate func setUpScenery() { }
+    fileprivate func setUpScenery() {
+        
+        background = SKSpriteNode(imageNamed: ImageName.Background)
+    
+        background.position = CGPoint(x: 0, y: 0)
+        background.zPosition = Layer.Background
+        background.anchorPoint = CGPoint(x: 0,y: 0)
+        background.size = CGSize(width: self.size.width, height: self.size.height)
+    
+        addChild(background)
+    }
+    
+    
     fileprivate func setUpPrize() { }
     
     //MARK: - Vine methods
