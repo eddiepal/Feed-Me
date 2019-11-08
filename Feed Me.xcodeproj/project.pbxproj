@@ -24,6 +24,7 @@
 		59CCECF32375928E00BB97D2 /* Slice.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECEB2375928D00BB97D2 /* Slice.caf */; };
 		59CCECF42375928E00BB97D2 /* Splash.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECEC2375928D00BB97D2 /* Splash.caf */; };
 		59CCECF6237592BD00BB97D2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECF5237592BD00BB97D2 /* Media.xcassets */; };
+		59CCECF82375936400BB97D2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCECF72375936400BB97D2 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		59CCECEB2375928D00BB97D2 /* Slice.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Slice.caf; sourceTree = "<group>"; };
 		59CCECEC2375928D00BB97D2 /* Splash.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splash.caf; sourceTree = "<group>"; };
 		59CCECF5237592BD00BB97D2 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../../../Downloads/artwork/Media.xcassets; sourceTree = "<group>"; };
+		59CCECF72375936400BB97D2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		59CCECDF237591D200BB97D2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				59CCECF72375936400BB97D2 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				59CCECCE237590F800BB97D2 /* GameScene.swift in Sources */,
 				59CCECD0237590F800BB97D2 /* GameViewController.swift in Sources */,
 				59CCECC8237590F800BB97D2 /* AppDelegate.swift in Sources */,
+				59CCECF82375936400BB97D2 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
