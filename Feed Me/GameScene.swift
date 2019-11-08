@@ -1,89 +1,47 @@
-//
-//  GameScene.swift
-//  Feed Me
-//
-//  Created by 20075129 on 08/11/2019.
-//  Copyright © 2019 20075129. All rights reserved.
-//
-
 import SpriteKit
-import GameplayKit
+
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
-    
     override func didMove(to view: SKView) {
-        
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
-        
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
+        //setUpPhysics()
+        //etUpScenery()
+        //setUpPrize()
+        //setUpVines()
+        //setUpCrocodile()
+        //setUpAudio()
     }
     
+    //MARK: - Level setup
     
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
+    fileprivate func setUpPhysics() { }
+    fileprivate func setUpScenery() { }
+    fileprivate func setUpPrize() { }
     
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
+    //MARK: - Vine methods
     
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
+    fileprivate func setUpVines() { }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-    }
+    //MARK: - Croc methods
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-    }
+    fileprivate func setUpCrocodile() { }
+    fileprivate func animateCrocodile() { }
+    fileprivate func runNomNomAnimationWithDelay(_ delay: TimeInterval) { }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
+    //MARK: - Touch handling
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { }
+    fileprivate func showMoveParticles(touchPosition: CGPoint) { }
     
+    //MARK: - Game logic
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
+    override func update(_ currentTime: TimeInterval) { }
+    func didBegin(_ contact: SKPhysicsContact) { }
+    fileprivate func checkIfVineCutWithBody(_ body: SKPhysicsBody) { }
+    fileprivate func switchToNewGameWithTransition(_ transition: SKTransition) { }
+    
+    //MARK: - Audio
+    
+    fileprivate func setUpAudio() { }
 }

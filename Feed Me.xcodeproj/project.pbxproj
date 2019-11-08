@@ -15,6 +15,15 @@
 		59CCECD3237590F800BB97D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECD1237590F800BB97D2 /* Main.storyboard */; };
 		59CCECD5237590FA00BB97D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECD4237590FA00BB97D2 /* Assets.xcassets */; };
 		59CCECD8237590FA00BB97D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECD6237590FA00BB97D2 /* LaunchScreen.storyboard */; };
+		59CCECED2375928E00BB97D2 /* Level-01.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECE32375928D00BB97D2 /* Level-01.plist */; };
+		59CCECEE2375928E00BB97D2 /* Particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECE52375928D00BB97D2 /* Particle.png */; };
+		59CCECEF2375928E00BB97D2 /* Particle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECE62375928D00BB97D2 /* Particle.sks */; };
+		59CCECF02375928E00BB97D2 /* Particle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECE72375928D00BB97D2 /* Particle@2x.png */; };
+		59CCECF12375928E00BB97D2 /* CheeZeeJungle.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECE92375928D00BB97D2 /* CheeZeeJungle.caf */; };
+		59CCECF22375928E00BB97D2 /* NomNom.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECEA2375928D00BB97D2 /* NomNom.caf */; };
+		59CCECF32375928E00BB97D2 /* Slice.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECEB2375928D00BB97D2 /* Slice.caf */; };
+		59CCECF42375928E00BB97D2 /* Splash.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECEC2375928D00BB97D2 /* Splash.caf */; };
+		59CCECF6237592BD00BB97D2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECF5237592BD00BB97D2 /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +37,15 @@
 		59CCECD4237590FA00BB97D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59CCECD7237590FA00BB97D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59CCECD9237590FA00BB97D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59CCECE32375928D00BB97D2 /* Level-01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level-01.plist"; sourceTree = "<group>"; };
+		59CCECE52375928D00BB97D2 /* Particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Particle.png; sourceTree = "<group>"; };
+		59CCECE62375928D00BB97D2 /* Particle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Particle.sks; sourceTree = "<group>"; };
+		59CCECE72375928D00BB97D2 /* Particle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Particle@2x.png"; sourceTree = "<group>"; };
+		59CCECE92375928D00BB97D2 /* CheeZeeJungle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CheeZeeJungle.caf; sourceTree = "<group>"; };
+		59CCECEA2375928D00BB97D2 /* NomNom.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NomNom.caf; sourceTree = "<group>"; };
+		59CCECEB2375928D00BB97D2 /* Slice.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Slice.caf; sourceTree = "<group>"; };
+		59CCECEC2375928D00BB97D2 /* Splash.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splash.caf; sourceTree = "<group>"; };
+		59CCECF5237592BD00BB97D2 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../../../Downloads/artwork/Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +78,9 @@
 		59CCECC6237590F800BB97D2 /* Feed Me */ = {
 			isa = PBXGroup;
 			children = (
+				59CCECE12375928D00BB97D2 /* Resources */,
+				59CCECE0237591D900BB97D2 /* Classes */,
+				59CCECDF237591D200BB97D2 /* Helpers */,
 				59CCECC7237590F800BB97D2 /* AppDelegate.swift */,
 				59CCECC9237590F800BB97D2 /* GameScene.sks */,
 				59CCECCB237590F800BB97D2 /* Actions.sks */,
@@ -69,8 +90,62 @@
 				59CCECD4237590FA00BB97D2 /* Assets.xcassets */,
 				59CCECD6237590FA00BB97D2 /* LaunchScreen.storyboard */,
 				59CCECD9237590FA00BB97D2 /* Info.plist */,
+				59CCECF5237592BD00BB97D2 /* Media.xcassets */,
 			);
 			path = "Feed Me";
+			sourceTree = "<group>";
+		};
+		59CCECDF237591D200BB97D2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		59CCECE0237591D900BB97D2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		59CCECE12375928D00BB97D2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				59CCECE22375928D00BB97D2 /* Data */,
+				59CCECE42375928D00BB97D2 /* Particles */,
+				59CCECE82375928D00BB97D2 /* Sounds */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		59CCECE22375928D00BB97D2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				59CCECE32375928D00BB97D2 /* Level-01.plist */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		59CCECE42375928D00BB97D2 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				59CCECE52375928D00BB97D2 /* Particle.png */,
+				59CCECE62375928D00BB97D2 /* Particle.sks */,
+				59CCECE72375928D00BB97D2 /* Particle@2x.png */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
+		59CCECE82375928D00BB97D2 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				59CCECE92375928D00BB97D2 /* CheeZeeJungle.caf */,
+				59CCECEA2375928D00BB97D2 /* NomNom.caf */,
+				59CCECEB2375928D00BB97D2 /* Slice.caf */,
+				59CCECEC2375928D00BB97D2 /* Splash.caf */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,9 +208,18 @@
 			files = (
 				59CCECD3237590F800BB97D2 /* Main.storyboard in Resources */,
 				59CCECCA237590F800BB97D2 /* GameScene.sks in Resources */,
+				59CCECF6237592BD00BB97D2 /* Media.xcassets in Resources */,
+				59CCECED2375928E00BB97D2 /* Level-01.plist in Resources */,
+				59CCECF42375928E00BB97D2 /* Splash.caf in Resources */,
+				59CCECF12375928E00BB97D2 /* CheeZeeJungle.caf in Resources */,
+				59CCECEE2375928E00BB97D2 /* Particle.png in Resources */,
+				59CCECF32375928E00BB97D2 /* Slice.caf in Resources */,
+				59CCECF22375928E00BB97D2 /* NomNom.caf in Resources */,
 				59CCECD5237590FA00BB97D2 /* Assets.xcassets in Resources */,
 				59CCECD8237590FA00BB97D2 /* LaunchScreen.storyboard in Resources */,
 				59CCECCC237590F800BB97D2 /* Actions.sks in Resources */,
+				59CCECEF2375928E00BB97D2 /* Particle.sks in Resources */,
+				59CCECF02375928E00BB97D2 /* Particle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
