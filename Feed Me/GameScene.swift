@@ -3,6 +3,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     var background: SKSpriteNode!
+    var water: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         //setUpPhysics()
@@ -28,6 +29,15 @@ class GameScene: SKScene {
         background.zPosition = Layer.Background
         background.anchorPoint = CGPoint(x: 0,y: 0)
         background.size = CGSize(width: self.size.width, height: self.size.height)
+        
+        water = SKSpriteNode(imageNamed: ImageName.Water)
+        
+        background.position = CGPoint(x: 0, y: 0)
+        water.zPosition = Layer.Water
+        water.anchorPoint = CGPoint(x: 0,y: 0)
+        water.size = CGSize(width: self.size.width, height: self.size.height/100 * 21.39)
+        
+        addChild(water)
     
         addChild(background)
     }
