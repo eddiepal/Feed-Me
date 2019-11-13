@@ -4,6 +4,8 @@ class GameScene: SKScene {
     
     var background: SKSpriteNode!
     var water: SKSpriteNode!
+    private var crocodile: SKSpriteNode!
+    var texture: SKTexture!
     
     override func didMove(to view: SKView) {
         //setUpPhysics()
@@ -51,7 +53,19 @@ class GameScene: SKScene {
     
     //MARK: - Croc methods
     
-    fileprivate func setUpCrocodile() { }
+    fileprivate func setUpCrocodile() {
+        crocodile.position = CGPoint(x: 0.75, y: 0.312)
+        crocodile = SKSpriteNode(imageNamed: ImageName.CrocMouthClosed)
+        crocodile.zPosition = Layer.Background
+        crocodile.texture = SKTexture(imageNamed: ImageName.CrocMask)
+        
+        crocodile.physicsBody?.categoryBitMask = PhysicsCategory.Crocodile
+        crocodile.physicsBody?.collisionBitMask = 0
+        crocodile.physicsBody?.contactTestBitMask = PhysicsCategory.Prize
+        
+        texture = SKTexture(imageNamed: ImageName.CrocMask)
+        crocodile.physicsBody = SKPhysicsBody(texture: crocodile.texture!, size: crocodile.size)
+    }
     fileprivate func animateCrocodile() { }
     fileprivate func runNomNomAnimationWithDelay(_ delay: TimeInterval) { }
     
