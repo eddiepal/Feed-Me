@@ -45,7 +45,6 @@ class GameScene: SKScene {
         addChild(background)
     }
     
-    
     fileprivate func setUpPrize() { }
     
     //MARK: - Vine methods
@@ -72,10 +71,28 @@ class GameScene: SKScene {
         addChild(crocodile)
         
         animateCrocodile()
-        
-
     }
+    
     fileprivate func animateCrocodile() {
+        //mutipy by the difference then add on the minimum number
+        
+        //Generate a random number in range 2 to 3, by using drand48() which generate a random double in range 0 to 1. Store result in duration
+        let d = drand48()
+        var duration = (d + 2)
+        
+        let waitOpen = SKAction.wait(forDuration: duration)
+        let open = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthOpen))
+        //Generate a random number in range 3 to 5, by using drand48() which generate a random double in range 0 to 1. Store result in duration.
+        let r = drand48()
+        duration = ((r * 3) + 2)
+        let waitClosed = SKAction.wait(forDuration: duration)
+        let close = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthClosed))
+        
+        let sequence = SKAction.sequence([waitOpen, open, waitClosed, close])
+        let loop = SKAction.repeatForever(sequence)
+        
+        crocodile.run(loop)
+        
         
     }
     
