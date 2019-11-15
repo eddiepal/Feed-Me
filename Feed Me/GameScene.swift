@@ -5,12 +5,13 @@ class GameScene: SKScene {
     var background: SKSpriteNode!
     var water: SKSpriteNode!
     private var crocodile: SKSpriteNode!
+    private var prize: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         //setUpPhysics()
         setUpScenery()
         //animateCrocodile()
-        //setUpPrize()
+        setUpPrize()
         //setUpVines()
         setUpCrocodile()
         //setUpAudio()
@@ -45,7 +46,17 @@ class GameScene: SKScene {
         addChild(background)
     }
     
-    fileprivate func setUpPrize() { }
+    fileprivate func setUpPrize() {
+        prize = SKSpriteNode(texture: SKTexture(imageNamed: ImageName.Prize))
+        prize.position = CGPoint(x: size.width*0.5, y: size.height*0.7)
+        prize.zPosition = Layer.Prize
+        prize.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: ImageName.Prize), size: prize.size)
+        prize.physicsBody?.categoryBitMask = PhysicsCategory.Prize
+        prize.physicsBody?.collisionBitMask = 0
+        prize.physicsBody?.density = 0.5
+        prize.physicsBody?.isDynamic = true
+        addChild(prize)
+    }
     
     //MARK: - Vine methods
     
