@@ -1,6 +1,6 @@
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var background: SKSpriteNode!
     var water: SKSpriteNode!
@@ -8,7 +8,7 @@ class GameScene: SKScene {
     private var prize: SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        //setUpPhysics()
+        setUpPhysics()
         setUpScenery()
         //animateCrocodile()
         setUpPrize()
@@ -23,7 +23,11 @@ class GameScene: SKScene {
     
     //MARK: - Level setup
     
-    fileprivate func setUpPhysics() { }
+    fileprivate func setUpPhysics() {
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
+        physicsWorld.speed = 1.0
+    }
     fileprivate func setUpScenery() {
         
         background = SKSpriteNode(imageNamed: ImageName.Background)
