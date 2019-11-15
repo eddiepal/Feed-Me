@@ -179,6 +179,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let removeNode = SKAction.removeFromParent()
             let sequence = SKAction.sequence([shrink, removeNode])
             runNomNomAnimationWithDelay(0.15)
+            // transition to next level
+            switchToNewGameWithTransition(SKTransition.doorway(withDuration: 1.0))
             prize.run(sequence)
         }
     }
@@ -199,7 +201,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             })
         }
     }
-    fileprivate func switchToNewGameWithTransition(_ transition: SKTransition) { }
+    fileprivate func switchToNewGameWithTransition(_ transition: SKTransition) {
+        let delay = SKAction.wait(forDuration: 1)
+        let sceneChange = SKAction.run({
+            let scene = GameScene(size: self.size)
+            self.view?.presentScene(scene, transition: transition)
+        })
+        
+        run(SKAction.sequence([delay, sceneChange]))
+    }
     
     //MARK: - Audio
     
