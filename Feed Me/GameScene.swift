@@ -12,6 +12,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var splashSoundAction: SKAction!
     private var nomNomSoundAction: SKAction!
     private var levelOver = false
+    private var vineCut = false
     
     override func didMove(to view: SKView) {
         setUpPhysics()
@@ -21,10 +22,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setUpVines()
         setUpCrocodile()
         setUpAudio()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
     }
     
     //MARK: - Level setup
@@ -151,6 +148,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: - Touch handling
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        vineCut = false
+    }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let startPoint = touch.location(in: self)
@@ -207,6 +208,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     fileprivate func checkIfVineCutWithBody(_ body: SKPhysicsBody) {
+        
+        if vineCut && !GameConfiguration.CanCutMultipleVinesAtOnce {
+            return
+        }
+        
         let node = body.node!
         
         // if it has a name it must be a vine node
@@ -224,6 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             })
             run(sliceSoundAction)
         }
+        vineCut = true
     }
     
     fileprivate func switchToNewGameWithTransition(_ transition: SKTransition) {
