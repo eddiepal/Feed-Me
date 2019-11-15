@@ -1,4 +1,5 @@
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -6,6 +7,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var water: SKSpriteNode!
     private var crocodile: SKSpriteNode!
     private var prize: SKSpriteNode!
+    private static var backgroundMusicPlayer: AVAudioPlayer!
+    private var sliceSoundAction: SKAction!
+    private var splashSoundAction: SKAction!
+    private var nomNomSoundAction: SKAction!
+    private var levelOver = false
     
     override func didMove(to view: SKView) {
         setUpPhysics()
@@ -14,7 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setUpPrize()
         setUpVines()
         setUpCrocodile()
-        //setUpAudio()
+        setUpAudio()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -170,20 +176,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: - Game logic
     
     override func update(_ currentTime: TimeInterval) {
+        if levelOver {
+            return
+        }
         if prize.position.y <= 0 {
+            levelOver = true
+            run(splashSoundAction)
             switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
         }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        if levelOver {
+            return
+        }
         if (contact.bodyA.node == crocodile && contact.bodyB.node == prize)
             || (contact.bodyA.node == prize && contact.bodyB.node == crocodile) {
+            levelOver = true
             
             // shrink the pineapple away
             let shrink = SKAction.scale(to: 0, duration: 0.08)
             let removeNode = SKAction.removeFromParent()
             let sequence = SKAction.sequence([shrink, removeNode])
             runNomNomAnimationWithDelay(0.15)
+            run(nomNomSoundAction)
             // transition to next level
             switchToNewGameWithTransition(SKTransition.doorway(withDuration: 1.0))
             prize.run(sequence)
@@ -195,6 +211,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // if it has a name it must be a vine node
         if let name = node.name {
+            
             // snip the vine
             node.removeFromParent()
             
@@ -205,6 +222,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let sequence = SKAction.sequence([fadeAway, removeNode])
                 node.run(sequence)
             })
+            run(sliceSoundAction)
         }
     }
     
@@ -220,5 +238,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: - Audio
     
-    fileprivate func setUpAudio() { }
+    fileprivate func setUpAudio() {
+        if GameScene.backgroundMusicPlayer == nil {
+            let backgroundMusicURL = Bundle.main.url(forResource: SoundFile.BackgroundMusic, withExtension: nil)
+            
+            do {
+                let theme = try AVAudioPlayer(contentsOf: backgroundMusicURL!)
+                GameScene.backgroundMusicPlayer = theme
+                
+            } catch {
+                // couldn't load file :[
+            }
+            
+            GameScene.backgroundMusicPlayer.numberOfLoops = -1
+        }
+        if !GameScene.backgroundMusicPlayer.isPlaying {
+            GameScene.backgroundMusicPlayer.play()
+        }
+        
+        sliceSoundAction = SKAction.playSoundFileNamed(SoundFile.Slice, waitForCompletion: false)
+        splashSoundAction = SKAction.playSoundFileNamed(SoundFile.Splash, waitForCompletion: false)
+        nomNomSoundAction = SKAction.playSoundFileNamed(SoundFile.NomNom, waitForCompletion: false)
+    }
 }
