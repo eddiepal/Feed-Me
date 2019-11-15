@@ -169,7 +169,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: - Game logic
     
-    override func update(_ currentTime: TimeInterval) { }
+    override func update(_ currentTime: TimeInterval) {
+        if prize.position.y <= 0 {
+            switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
+        }
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         if (contact.bodyA.node == crocodile && contact.bodyB.node == prize)
             || (contact.bodyA.node == prize && contact.bodyB.node == crocodile) {
@@ -184,6 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             prize.run(sequence)
         }
     }
+    
     fileprivate func checkIfVineCutWithBody(_ body: SKPhysicsBody) {
         let node = body.node!
         
@@ -201,6 +207,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             })
         }
     }
+    
     fileprivate func switchToNewGameWithTransition(_ transition: SKTransition) {
         let delay = SKAction.wait(forDuration: 1)
         let sceneChange = SKAction.run({
