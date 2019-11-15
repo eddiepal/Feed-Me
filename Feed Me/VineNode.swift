@@ -55,8 +55,32 @@ class VineNode: SKNode {
             vineSegment.physicsBody?.categoryBitMask = PhysicsCategory.Vine
             vineSegment.physicsBody?.collisionBitMask = PhysicsCategory.VineRoot
         }
+        
+        // set up joint for vine root
+        let joint = SKPhysicsJointPin.joint(withBodyA: vineRoot.physicsBody!,
+                                            bodyB: vineSegments[0].physicsBody!,
+                                            anchor: CGPoint(x: vineRoot.frame.midX, y: vineRoot.frame.midY))
+        scene.physicsWorld.add(joint)
+        
+        // set up joints between vine parts
+        for i in 1 ..< length {
+            let nodeA = vineSegments[i - 1]
+            let nodeB = vineSegments[i]
+            let joint = SKPhysicsJointPin.joint(withBodyA: nodeA.physicsBody!, bodyB: nodeB.physicsBody!, anchor: CGPoint(x: nodeA.frame.midX, y: nodeA.frame.minY))
+            scene.physicsWorld.add(joint)
+        }
     }
     
-    func attachToPrize(_ prize: SKSpriteNode) { }
+    func attachToPrize(_ prize: SKSpriteNode) {
+        // align last segment of vine with prize
+        let lastNode = vineSegments.last!
+        lastNode.position = CGPoint(x: prize.position.x, y: prize.position.y + prize.size.height * 0.1)
+        
+        // set up connecting joint
+        let joint = SKPhysicsJointPin.joint(withBodyA: lastNode.physicsBody!,
+                                            bodyB: prize.physicsBody!, anchor: lastNode.position)
+        
+        prize.scene?.physicsWorld.add(joint)
+    }
     
 }
