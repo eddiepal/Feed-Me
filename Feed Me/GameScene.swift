@@ -157,7 +157,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: - Game logic
     
     override func update(_ currentTime: TimeInterval) { }
-    func didBegin(_ contact: SKPhysicsContact) { }
+    func didBegin(_ contact: SKPhysicsContact) {
+        if (contact.bodyA.node == crocodile && contact.bodyB.node == prize)
+            || (contact.bodyA.node == prize && contact.bodyB.node == crocodile) {
+            
+            // shrink the pineapple away
+            let shrink = SKAction.scale(to: 0, duration: 0.08)
+            let removeNode = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([shrink, removeNode])
+            prize.run(sequence)
+        }
+    }
     fileprivate func checkIfVineCutWithBody(_ body: SKPhysicsBody) {
         let node = body.node!
         
