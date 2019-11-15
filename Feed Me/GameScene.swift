@@ -132,7 +132,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    fileprivate func runNomNomAnimationWithDelay(_ delay: TimeInterval) { }
+    fileprivate func runNomNomAnimationWithDelay(_ delay: TimeInterval) {
+        crocodile.removeAllActions()
+        
+        let closeMouth = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthClosed))
+        let wait = SKAction.wait(forDuration: delay)
+        let openMouth = SKAction.setTexture(SKTexture(imageNamed: ImageName.CrocMouthOpen))
+        let sequence = SKAction.sequence([closeMouth, wait, openMouth, wait, closeMouth])
+        
+        crocodile.run(sequence)
+    }
     
     //MARK: - Touch handling
     
@@ -145,10 +154,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene?.physicsWorld.enumerateBodies(alongRayStart: startPoint, end: endPoint,
                                                 using: { (body, point, normal, stop) in
                                                     self.checkIfVineCutWithBody(body)
+                                                    
             })
             
             // produce some nice particles
             showMoveParticles(touchPosition: startPoint)
+            crocodile.removeAllActions()
+            crocodile.texture = SKTexture(imageNamed: ImageName.CrocMouthOpen)
+            animateCrocodile()
         }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { }
@@ -165,6 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let shrink = SKAction.scale(to: 0, duration: 0.08)
             let removeNode = SKAction.removeFromParent()
             let sequence = SKAction.sequence([shrink, removeNode])
+            runNomNomAnimationWithDelay(0.15)
             prize.run(sequence)
         }
     }
