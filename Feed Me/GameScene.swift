@@ -17,7 +17,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         setUpPhysics()
         setUpScenery()
-        //animateCrocodile()
         setUpPrize()
         setUpVines()
         setUpCrocodile()
@@ -76,7 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for i in 0 ..< vines.count{
         // 3 create vine
         let vineData = vines[i]
-        let length = Int(vineData["length"] as! NSNumber)
+            let length = Int(truncating: vineData["length"] as! NSNumber)
         let relAnchorPoint = CGPointFromString(vineData["relAnchorPoint"] as! String)
         let anchorPoint = CGPoint(x: relAnchorPoint.x * size.width,
                                   y: relAnchorPoint.y * size.height)
