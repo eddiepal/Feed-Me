@@ -53,15 +53,12 @@ class MenuScene: SKScene {
         addChild(background)
         
         // MARK: Add histolytica button
-        restartButton = ButtonNode(iconName: HUD.ButtonRestart, text: String(GameConfiguration.RestartButtonText), onButtonPress: histolyticaPressed)
+        restartButton = ButtonNode(iconName: HUD.ButtonRestart, text: String(GameConfiguration.RestartButtonText), onButtonPress: startButtonPressed)
         histolyticaButton.position = CGPoint(x: size.width * 0.25, y: margin + histolyticaButton.size.height / 2)
         addChild(histolyticaButton)
     }
     
-    func histolyticaPressed() {
+    func startButtonPressed() {
         print("Histolytica pressed!")
     }
-    
-    
-    
 }
