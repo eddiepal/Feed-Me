@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59229FFB23ABA0FA002DC881 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59229FFA23ABA0FA002DC881 /* MenuScene.sks */; };
 		593B2EB1237ED1300041FE2B /* VineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593B2EB0237ED1300041FE2B /* VineNode.swift */; };
 		595FF2A9239809F500534275 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FF2A8239809F500534275 /* MenuScene.swift */; };
 		595FF2AB2398163600534275 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FF2AA2398163600534275 /* ButtonNode.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59229FFA23ABA0FA002DC881 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		593B2EB0237ED1300041FE2B /* VineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineNode.swift; sourceTree = "<group>"; };
 		595FF2A8239809F500534275 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		595FF2AA2398163600534275 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
@@ -86,9 +88,10 @@
 				59CCECE0237591D900BB97D2 /* Classes */,
 				59CCECDF237591D200BB97D2 /* Helpers */,
 				59CCECC7237590F800BB97D2 /* AppDelegate.swift */,
-				59CCECC9237590F800BB97D2 /* GameScene.sks */,
 				59CCECCD237590F800BB97D2 /* GameScene.swift */,
 				595FF2A8239809F500534275 /* MenuScene.swift */,
+				59CCECC9237590F800BB97D2 /* GameScene.sks */,
+				59229FFA23ABA0FA002DC881 /* MenuScene.sks */,
 				59CCECCF237590F800BB97D2 /* GameViewController.swift */,
 				59CCECD1237590F800BB97D2 /* Main.storyboard */,
 				59CCECD6237590FA00BB97D2 /* LaunchScreen.storyboard */,
@@ -218,6 +221,7 @@
 				59CCECED2375928E00BB97D2 /* Level-01.plist in Resources */,
 				59CCECF42375928E00BB97D2 /* Splash.caf in Resources */,
 				59CCECF12375928E00BB97D2 /* CheeZeeJungle.caf in Resources */,
+				59229FFB23ABA0FA002DC881 /* MenuScene.sks in Resources */,
 				59CCECEE2375928E00BB97D2 /* Particle.png in Resources */,
 				59CCECF32375928E00BB97D2 /* Slice.caf in Resources */,
 				59CCECF22375928E00BB97D2 /* NomNom.caf in Resources */,

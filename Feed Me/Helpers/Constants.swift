@@ -46,7 +46,7 @@ struct GameConfiguration {
 }
 
 struct HUD {
-    static let ButtonRestart = ""
+    static let ButtonRestart = "button"
     static let Heart = ""
-    static let OptionsButton = ""
+    static let OptionsButton = "options"
 }

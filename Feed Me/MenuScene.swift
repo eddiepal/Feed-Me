@@ -2,8 +2,6 @@ import SpriteKit
 
 class MenuScene: SKScene {
     
-    var restartButton: ButtonNode!
-    
     var background: SKSpriteNode!
     var water: SKSpriteNode!
     private var crocodile: SKSpriteNode!
@@ -16,7 +14,7 @@ class MenuScene: SKScene {
     
     let margin = CGFloat(30)
     
-    var histolyticaButton: ButtonNode!
+    var restartButton: ButtonNode!
     
     let coinLeftLabel = SKLabelNode(fontNamed: "Courier-Bold")
     let coinRightLabel = SKLabelNode(fontNamed: "Courier-Bold")
@@ -54,11 +52,11 @@ class MenuScene: SKScene {
         
         // MARK: Add histolytica button
         restartButton = ButtonNode(iconName: HUD.ButtonRestart, text: String(GameConfiguration.RestartButtonText), onButtonPress: startButtonPressed)
-        histolyticaButton.position = CGPoint(x: size.width * 0.25, y: margin + histolyticaButton.size.height / 2)
-        addChild(histolyticaButton)
+        restartButton.position = CGPoint(x: size.width * 0.25, y: margin + restartButton.size.height / 2)
+        addChild(restartButton)
     }
     
     func startButtonPressed() {
-        print("Histolytica pressed!")
+        print("Start button pressed!")
     }
 }
