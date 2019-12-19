@@ -17,6 +17,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let margin = CGFloat(30)
     
     var pauseButton: ButtonNode!
+    var resumeButton: ButtonNode!
+    var optionsButton: ButtonNode!
+    var exitButton: ButtonNode!
     
     override func didMove(to view: SKView) {
         setUpPhysics()
@@ -60,6 +63,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton = ButtonNode(iconName: HUD.ButtonPause, text: String(""), onButtonPress: pauseButtonPressed)
         pauseButton.position = CGPoint(x: size.width * 0.10, y: pauseButton.size.height / 2)
         addChild(pauseButton)
+        
+        // MARK: Add pause menu button
+        resumeButton = ButtonNode(iconName: HUD.ButtonRestart, text: String("Resume"), onButtonPress: resumeButtonPressed)
+        resumeButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.40 + resumeButton.size.height / 2)
+        //resumeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        addChild(resumeButton)
+        
+        // MARK: Add pause menu button
+        optionsButton = ButtonNode(iconName: HUD.ButtonRestart, text: String("Options"), onButtonPress: optionsButtonPressed)
+        optionsButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.50 + optionsButton.size.height / 2)
+        addChild(optionsButton)
+        
+        // MARK: Add pause menu button
+        exitButton = ButtonNode(iconName: HUD.ButtonRestart, text: String("Exit"), onButtonPress: exitButtonPressed)
+        exitButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.60 + exitButton.size.height / 2)
+        addChild(exitButton)
+        
+        resumeButton.isHidden = false;
+        optionsButton.isHidden = false;
+        exitButton.isHidden = false;
     }
     
     fileprivate func setUpPrize() {
@@ -279,6 +302,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func pauseButtonPressed() {
         print("Pause button pressed!")
-        
+        pauseButton.isHidden = true;
+        self.isPaused = true
+        resumeButton.isHidden = false;
+        optionsButton.isHidden = false;
+        exitButton.isHidden = false;
+        //self.physicsWorld.speed = 0.0
     }
+    
+    func resumeButtonPressed() {
+        print("Resume button pressed!")
+        pauseButton.isHidden = false;
+        resumeButton.isHidden = true;
+        optionsButton.isHidden = true;
+        exitButton.isHidden = true;
+        self.isPaused = false
+    }
+    
+    func optionsButtonPressed() {
+        print("Options button pressed!")
+    }
+    
+    func exitButtonPressed() {
+        print("Exit button pressed!")
+
+    }
+    
 }
