@@ -47,16 +47,28 @@ class MenuScene: SKScene {
         
         
         addChild(water)
-        
         addChild(background)
         
-        // MARK: Add histolytica button
+        // MARK: Add startbutton button
         restartButton = ButtonNode(iconName: HUD.ButtonRestart, text: String(GameConfiguration.RestartButtonText), onButtonPress: startButtonPressed)
-        restartButton.position = CGPoint(x: size.width * 0.25, y: margin + restartButton.size.height / 2)
+        restartButton.position = CGPoint(x: size.width * 0.50, y: margin + 80 + restartButton.size.height / 2)
         addChild(restartButton)
     }
     
     func startButtonPressed() {
         print("Start button pressed!")
+        switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
+        
+    }
+    
+    
+    fileprivate func switchToNewGameWithTransition(_ transition: SKTransition) {
+        let delay = SKAction.wait(forDuration: 1)
+        let sceneChange = SKAction.run({
+            let scene = GameScene(size: self.size)
+            self.view?.presentScene(scene)
+        })
+        
+        run(SKAction.sequence([delay, sceneChange]))
     }
 }

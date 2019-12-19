@@ -43,10 +43,12 @@ struct GameConfiguration {
     static let VineDataFile = "Level-01.plist"
     static let CanCutMultipleVinesAtOnce = false
     static let RestartButtonText = "Start Game"
+    static let PauseButtonText = "Pause Game"
 }
 
 struct HUD {
     static let ButtonRestart = "button"
+    static var ButtonPause = "options"
     static let Heart = ""
     static let OptionsButton = "options"
 }

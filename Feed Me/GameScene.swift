@@ -14,6 +14,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var levelOver = false
     private var vineCut = false
     
+    let margin = CGFloat(30)
+    
+    var pauseButton: ButtonNode!
+    
     override func didMove(to view: SKView) {
         setUpPhysics()
         setUpScenery()
@@ -48,8 +52,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         addChild(water)
-    
         addChild(background)
+
+        //HUD.ButtonPause.size = CGSize(width: self.size.width, height: self.size.height)
+        
+        // MARK: Add pause menu button
+        pauseButton = ButtonNode(iconName: HUD.ButtonPause, text: String(""), onButtonPress: pauseButtonPressed)
+        pauseButton.position = CGPoint(x: size.width * 0.10, y: pauseButton.size.height / 2)
+        addChild(pauseButton)
     }
     
     fileprivate func setUpPrize() {
@@ -265,5 +275,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sliceSoundAction = SKAction.playSoundFileNamed(SoundFile.Slice, waitForCompletion: false)
         splashSoundAction = SKAction.playSoundFileNamed(SoundFile.Splash, waitForCompletion: false)
         nomNomSoundAction = SKAction.playSoundFileNamed(SoundFile.NomNom, waitForCompletion: false)
+    }
+    
+    func pauseButtonPressed() {
+        print("Pause button pressed!")
+        
     }
 }
