@@ -12,7 +12,9 @@ struct ImageName {
     static let Prize = "Pineapple"
     static let PrizeMask = "PineappleMask"
     
-    static let Button = "Button"
+    static let Button = "button"
+    
+    static let Clear = "clear"
     
 }
 
@@ -22,7 +24,7 @@ struct Layer {
     static let Vine: CGFloat = 1
     static let Prize: CGFloat = 2
     static let Water: CGFloat = 3
-    static let Button: CGFloat = 80
+    static let Button: CGFloat = 10
 }
 
 struct PhysicsCategory {

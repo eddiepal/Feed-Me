@@ -50,20 +50,19 @@ class MenuScene: SKScene {
         addChild(background)
         
         // MARK: Add startbutton button
-        restartButton = ButtonNode(iconName: HUD.ButtonRestart, text: String(GameConfiguration.RestartButtonText), onButtonPress: startButtonPressed)
+        restartButton = ButtonNode(iconName: ImageName.Clear, text: String(GameConfiguration.RestartButtonText), onButtonPress: startButtonPressed)
         restartButton.position = CGPoint(x: size.width * 0.50, y: margin + 80 + restartButton.size.height / 2)
         addChild(restartButton)
     }
     
     func startButtonPressed() {
         print("Start button pressed!")
-        switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
-        
+        switchToNewGameWithTransition(SKTransition.fade(withDuration: 0))
     }
     
     
     fileprivate func switchToNewGameWithTransition(_ transition: SKTransition) {
-        let delay = SKAction.wait(forDuration: 1)
+        let delay = SKAction.wait(forDuration: 0)
         let sceneChange = SKAction.run({
             let scene = GameScene(size: self.size)
             self.view?.presentScene(scene)
