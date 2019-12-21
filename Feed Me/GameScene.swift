@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var resumeButton: ButtonNode!
     var optionsButton: ButtonNode!
     var exitButton: ButtonNode!
+    var backButton: ButtonNode!
     
     override func didMove(to view: SKView) {
         setUpPhysics()
@@ -64,28 +65,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.position = CGPoint(x: -size.width * 0.03, y: pauseButton.size.height / 2)
         addChild(pauseButton)
         
-        // MARK: Add pause menu button
+        // MARK: Add resume pause menu button
         resumeButton = ButtonNode(iconName: ImageName.Clear , text: String("Resume"), onButtonPress: resumeButtonPressed)
         resumeButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.60 + resumeButton.size.height / 2)
         resumeButton.zPosition = Layer.Button
         //resumeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         addChild(resumeButton)
         
-        // MARK: Add pause menu button
+        // MARK: Add options pause menu button
         optionsButton = ButtonNode(iconName: ImageName.Clear, text: String("Options"), onButtonPress: optionsButtonPressed)
         optionsButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.50 + optionsButton.size.height / 2)
         optionsButton.zPosition = Layer.Button
         addChild(optionsButton)
         
-        // MARK: Add pause menu button
+        // MARK: Add exit pause menu button
         exitButton = ButtonNode(iconName: ImageName.Clear, text: String("Exit"), onButtonPress: exitButtonPressed)
         exitButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.40 + exitButton.size.height / 2)
         exitButton.zPosition = Layer.Button
         addChild(exitButton)
         
+        // MARK: Add back pause menu button
+        backButton = ButtonNode(iconName: ImageName.Clear, text: String("Back"), onButtonPress: backButtonPressed)
+        backButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.40 + backButton.size.height / 2)
+        backButton.zPosition = Layer.Button
+        addChild(backButton)
+        
         resumeButton.isHidden = true;
         optionsButton.isHidden = true;
         exitButton.isHidden = true;
+        backButton.isHidden = true;
     }
     
     fileprivate func setUpPrize() {
@@ -313,6 +321,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nomNomSoundAction = SKAction.playSoundFileNamed(SoundFile.NomNom, waitForCompletion: false)
     }
     
+    var unchecked = true
+    
+    @IBAction func tick(sender: UIButton) {
+        if unchecked {
+            sender.setImage(UIImage(named: "checked.png"), for: [])
+            unchecked = false
+        }
+        else {
+            sender.setImage( UIImage(named:"unchecked.png"), for: [])
+            unchecked = true
+        }
+    }
+    
     func pauseButtonPressed() {
         print("Pause button pressed!")
         pauseButton.isHidden = true;
@@ -334,12 +355,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func optionsButtonPressed() {
         print("Options button pressed!")
+        resumeButton.isHidden = true;
+        optionsButton.isHidden = true;
+        exitButton.isHidden = true;
+        backButton.isHidden = false;
     }
     
     func exitButtonPressed() {
         print("Exit button pressed!")
         self.isPaused = false
         switchToMainMenu(SKTransition.fade(withDuration: 0))
+    }
+    
+    func backButtonPressed() {
+        print("Exit button pressed!")
+        resumeButton.isHidden = false;
+        optionsButton.isHidden = false;
+        exitButton.isHidden = false;
+        backButton.isHidden = true;
+        
     }
     
 }

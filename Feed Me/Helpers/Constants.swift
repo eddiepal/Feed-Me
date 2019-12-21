@@ -16,6 +16,9 @@ struct ImageName {
     
     static let Clear = "clear"
     
+    static let Checked = "checked"
+    static let Unchecked = "unchecked"
+    
 }
 
 struct Layer {

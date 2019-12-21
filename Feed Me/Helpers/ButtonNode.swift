@@ -19,7 +19,7 @@ class ButtonNode : SKSpriteNode {
         let label = SKLabelNode(fontNamed: "Courier-Bold")
         label.fontSize = 50
         label.fontColor = SKColor.black
-        label.position = CGPoint(x: size.width * 0.05, y: 0)
+        label.position = CGPoint(x: size.width * 0.03, y: 0)
         label.zPosition = Layer.Button
         label.verticalAlignmentMode = .center
         label.text = text
