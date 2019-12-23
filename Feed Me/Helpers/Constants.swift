@@ -45,7 +45,8 @@ struct SoundFile {
 }
 
 struct GameConfiguration {
-    static let VineDataFile = "Level-01.plist"
+    static var VineDataFile = "Level-01.plist"
+    static var levelGoal = 2
     static let CanCutMultipleVinesAtOnce = false
     static let RestartButtonText = "Start Game"
     static let PauseButtonText = "Pause Game"

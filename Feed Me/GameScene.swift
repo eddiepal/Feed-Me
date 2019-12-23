@@ -70,9 +70,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // MARK: Add score text
         
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
-        scoreLabel.text = "Score: \(gameData.score)"
-        scoreLabel.horizontalAlignmentMode = .right
-        scoreLabel.position = CGPoint(x: 160, y: 210)
+        scoreLabel.text = "Score: \(gameData.score)/\(GameConfiguration.levelGoal)"
+        scoreLabel.horizontalAlignmentMode = .left
+        scoreLabel.position = CGPoint(x: 35, y: 210)
         scoreLabel.zPosition = 500
         addChild(scoreLabel)
         
@@ -156,6 +156,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: - Vine methods
     
     fileprivate func setUpVines() {
+        // check which level we are on
+        if(gameData.level == 1)
+        {
+            GameConfiguration.VineDataFile = "Level-01.plist"
+            GameConfiguration.levelGoal = 2
+        }
+        else if(gameData.level == 2)
+        {
+            GameConfiguration.VineDataFile = "Level-02.plist"
+            GameConfiguration.levelGoal = 3
+        }
         // 1 load vine data
         let dataFile = Bundle.main.path(forResource: GameConfiguration.VineDataFile, ofType: nil)
         let vines = NSArray(contentsOfFile: dataFile!) as! [NSDictionary]
@@ -183,7 +194,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     fileprivate func setUpCrocodile() {
         
         crocodile = SKSpriteNode(texture: SKTexture(imageNamed: ImageName.CrocMouthClosed))
-        crocodile.position = CGPoint(x: size.width*0.75, y: size.height*0.312)
+        if(gameData.level == 1)
+        {
+            crocodile.position = CGPoint(x: size.width*0.75, y: size.height*0.312)
+        }
+        else if(gameData.level == 2)
+        {
+            crocodile.position = CGPoint(x: size.width*0.25, y: size.height*0.312)
+        }
         crocodile.zPosition = Layer.Crocodile
 
         crocodile.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: ImageName.CrocMask), size: crocodile.size)
@@ -272,7 +290,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             levelOver = true
             run(splashSoundAction)
             gameData.lives -= 1
-            livesLabel.text = "Score: \(gameData.lives)"
+            livesLabel.text = "Lives: \(gameData.lives)"
             saveGameData(gameData: gameData)
             if(gameData.lives > 0)
             {
@@ -300,7 +318,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             run(nomNomSoundAction)
 
             gameData.score += 1
-            scoreLabel.text = "Score: \(gameData.score)"
+            scoreLabel.text = "Score: \(gameData.score)/\(GameConfiguration.levelGoal)"
+            
+            if(gameData.score == 2)
+            {
+                gameData.score = 0
+                gameData.lives = 3
+                gameData.level = 2
+            }
             saveGameData(gameData: gameData)
             
             // transition to next level
@@ -440,9 +465,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("Score reset button pressed!")
         gameData.score = 0
         gameData.lives = 3
-        scoreLabel.text = "Score: \(gameData.score)"
-        livesLabel.text = "Score: \(gameData.lives)"
+        gameData.level = 1
         saveGameData(gameData: gameData)
+        self.isPaused = false
+        switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
     }
     
     fileprivate func loadGameData() -> GameData {
