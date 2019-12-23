@@ -57,3 +57,9 @@ struct HUD {
     static let Heart = ""
     static let OptionsButton = "options"
 }
+
+struct GameData: Codable {
+    var level: Int = 1
+    var score: Int = 0
+    var lives: Int = 1
+}

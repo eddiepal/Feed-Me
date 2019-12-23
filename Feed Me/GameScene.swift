@@ -21,6 +21,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var optionsButton: ButtonNode!
     var exitButton: ButtonNode!
     var backButton: ButtonNode!
+    var resetButton: ButtonNode!
+    
+    var scoreLabel: SKLabelNode!
+    var livesLabel: SKLabelNode!
+    
+    private var gameData = GameData()
     
     override func didMove(to view: SKView) {
         setUpPhysics()
@@ -40,6 +46,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     fileprivate func setUpScenery() {
         
+        gameData = loadGameData()
+        
         background = SKSpriteNode(imageNamed: ImageName.Background)
     
         background.position = CGPoint(x: 0, y: 0)
@@ -57,6 +65,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(water)
         addChild(background)
+        
+        // MARK: Add score text
+        
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel.text = "Score: \(gameData.score)"
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.position = CGPoint(x: 160, y: 210)
+        scoreLabel.zPosition = 500
+        addChild(scoreLabel)
+        
+        // MARK: Add lives text
+        
+        livesLabel = SKLabelNode(fontNamed: "Chalkduster")
+        livesLabel.text = "Lives: \(gameData.lives)"
+        livesLabel.horizontalAlignmentMode = .right
+        livesLabel.position = CGPoint(x: 720, y: 210)
+        livesLabel.zPosition = 500
+        addChild(livesLabel)
 
         //HUD.ButtonPause.size = CGSize(width: self.size.width, height: self.size.height)
         
@@ -90,10 +116,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backButton.zPosition = Layer.Button
         addChild(backButton)
         
-        resumeButton.isHidden = true;
-        optionsButton.isHidden = true;
-        exitButton.isHidden = true;
-        backButton.isHidden = true;
+        // MARK: Add score reset menu button
+        resetButton = ButtonNode(iconName: ImageName.Clear, text: String("Reset"), onButtonPress: scoreResetButtonPressed)
+        resetButton.position = CGPoint(x: size.width * 0.50, y: size.height * 0.50 + resetButton.size.height / 2)
+        resetButton.zPosition = Layer.Button
+        addChild(resetButton)
+        
+        resumeButton.isHidden = true
+        optionsButton.isHidden = true
+        exitButton.isHidden = true
+        backButton.isHidden = true
+        resetButton.isHidden = true
     }
     
     fileprivate func setUpPrize() {
@@ -226,7 +259,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if prize.position.y <= 0 {
             levelOver = true
             run(splashSoundAction)
-            switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
+            gameData.lives -= 1
+            livesLabel.text = "Score: \(gameData.lives)"
+            saveGameData(gameData: gameData)
+            if(gameData.lives > 0)
+            {
+                switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
+            }
+            else{
+                switchToMainMenu(SKTransition.fade(withDuration: 1.0))
+            }
         }
     }
     
@@ -244,6 +286,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let sequence = SKAction.sequence([shrink, removeNode])
             runNomNomAnimationWithDelay(0.15)
             run(nomNomSoundAction)
+
+            gameData.score += 1
+            scoreLabel.text = "Score: \(gameData.score)"
+            saveGameData(gameData: gameData)
+            
             // transition to next level
             switchToNewGameWithTransition(SKTransition.doorway(withDuration: 1.0))
             prize.run(sequence)
@@ -336,29 +383,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func pauseButtonPressed() {
         print("Pause button pressed!")
-        pauseButton.isHidden = true;
+        pauseButton.isHidden = true
         self.isPaused = true
-        resumeButton.isHidden = false;
-        optionsButton.isHidden = false;
-        exitButton.isHidden = false;
+        resumeButton.isHidden = false
+        optionsButton.isHidden = false
+        exitButton.isHidden = false
         //self.physicsWorld.speed = 0.0
     }
     
     func resumeButtonPressed() {
         print("Resume button pressed!")
-        pauseButton.isHidden = false;
-        resumeButton.isHidden = true;
-        optionsButton.isHidden = true;
-        exitButton.isHidden = true;
+        pauseButton.isHidden = false
+        resumeButton.isHidden = true
+        optionsButton.isHidden = true
+        exitButton.isHidden = true
         self.isPaused = false
     }
     
     func optionsButtonPressed() {
         print("Options button pressed!")
-        resumeButton.isHidden = true;
-        optionsButton.isHidden = true;
-        exitButton.isHidden = true;
-        backButton.isHidden = false;
+        resumeButton.isHidden = true
+        optionsButton.isHidden = true
+        exitButton.isHidden = true
+        backButton.isHidden = false
+        resetButton.isHidden = false
     }
     
     func exitButtonPressed() {
@@ -369,11 +417,50 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func backButtonPressed() {
         print("Exit button pressed!")
-        resumeButton.isHidden = false;
-        optionsButton.isHidden = false;
-        exitButton.isHidden = false;
-        backButton.isHidden = true;
+        resumeButton.isHidden = false
+        optionsButton.isHidden = false
+        exitButton.isHidden = false
+        backButton.isHidden = true
+        resetButton.isHidden = true
+    }
+    
+    func scoreResetButtonPressed() {
+        print("Score reset button pressed!")
+        gameData.score = 0
+        gameData.lives = 3
+        scoreLabel.text = "Score: \(gameData.score)"
+        livesLabel.text = "Score: \(gameData.lives)"
+        saveGameData(gameData: gameData)
+    }
+    
+    fileprivate func loadGameData() -> GameData {
         
+        do {
+            let datafile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("GameData.plist")
+            
+            let data = try Data(contentsOf: datafile)
+            let gameData = try PropertyListDecoder().decode(GameData.self, from: data)
+            return gameData
+        } catch {
+            print(error)
+        }
+        
+        return GameData()
+    }
+    
+    fileprivate func saveGameData(gameData: GameData) {
+        
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .xml
+        
+        do {
+            let datafile = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("GameData.plist")
+            
+            let data = try encoder.encode(gameData)
+            try data.write(to: datafile)
+        } catch {
+            print(error)
+        }
     }
     
 }
