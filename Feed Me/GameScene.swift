@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var scoreLabel: SKLabelNode!
     var livesLabel: SKLabelNode!
+    var levelLabel: SKLabelNode!
     
     private var gameData = GameData()
     
@@ -83,6 +84,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         livesLabel.position = CGPoint(x: 720, y: 210)
         livesLabel.zPosition = 500
         addChild(livesLabel)
+        
+        // MARK: Add level text
+        
+        levelLabel = SKLabelNode(fontNamed: "Chalkduster")
+        levelLabel.text = "Level \(gameData.level)"
+        levelLabel.horizontalAlignmentMode = .center
+        levelLabel.position = CGPoint(x: 380, y: 1275)
+        levelLabel.fontSize = 50
+        levelLabel.zPosition = 500
+        addChild(levelLabel)
+
 
         //HUD.ButtonPause.size = CGSize(width: self.size.width, height: self.size.height)
         
