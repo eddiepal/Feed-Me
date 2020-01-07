@@ -12,6 +12,7 @@
 		595D6DA823B100E700AEBF3B /* Level-02.plist in Resources */ = {isa = PBXBuildFile; fileRef = 595D6DA723B100E700AEBF3B /* Level-02.plist */; };
 		595FF2A9239809F500534275 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FF2A8239809F500534275 /* MenuScene.swift */; };
 		595FF2AB2398163600534275 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FF2AA2398163600534275 /* ButtonNode.swift */; };
+		59AB006323C48A6E005356D6 /* Level-03.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59AB006223C48A6E005356D6 /* Level-03.plist */; };
 		59CCECC8237590F800BB97D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCECC7237590F800BB97D2 /* AppDelegate.swift */; };
 		59CCECCA237590F800BB97D2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59CCECC9237590F800BB97D2 /* GameScene.sks */; };
 		59CCECCE237590F800BB97D2 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCECCD237590F800BB97D2 /* GameScene.swift */; };
@@ -36,6 +37,7 @@
 		595D6DA723B100E700AEBF3B /* Level-02.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level-02.plist"; sourceTree = "<group>"; };
 		595FF2A8239809F500534275 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		595FF2AA2398163600534275 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
+		59AB006223C48A6E005356D6 /* Level-03.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Level-03.plist"; sourceTree = "<group>"; };
 		59CCECC4237590F800BB97D2 /* Feed Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Feed Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CCECC7237590F800BB97D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59CCECC9237590F800BB97D2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				59CCECE32375928D00BB97D2 /* Level-01.plist */,
 				595D6DA723B100E700AEBF3B /* Level-02.plist */,
+				59AB006223C48A6E005356D6 /* Level-03.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				59CCECF32375928E00BB97D2 /* Slice.caf in Resources */,
 				595D6DA823B100E700AEBF3B /* Level-02.plist in Resources */,
 				59CCECF22375928E00BB97D2 /* NomNom.caf in Resources */,
+				59AB006323C48A6E005356D6 /* Level-03.plist in Resources */,
 				59CCECD8237590FA00BB97D2 /* LaunchScreen.storyboard in Resources */,
 				59CCECEF2375928E00BB97D2 /* Particle.sks in Resources */,
 				59CCECF02375928E00BB97D2 /* Particle@2x.png in Resources */,

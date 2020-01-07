@@ -23,6 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backButton: ButtonNode!
     var resetButton: ButtonNode!
     
+    var gameCompletedText: SKLabelNode!
+    
     var scoreLabel: SKLabelNode!
     var livesLabel: SKLabelNode!
     var levelLabel: SKLabelNode!
@@ -134,6 +136,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         resetButton.zPosition = Layer.Button
         addChild(resetButton)
         
+        gameCompletedText = SKLabelNode(text: "Game Completed!")
+        gameCompletedText.position = CGPoint(x: size.width * 0.50, y: size.height * 0.50 + optionsButton.size.height / 2)
+        optionsButton.zPosition = Layer.Button
+        addChild(optionsButton)
+        
         resumeButton.isHidden = true
         optionsButton.isHidden = true
         exitButton.isHidden = true
@@ -165,6 +172,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if(gameData.level == 2)
         {
             GameConfiguration.VineDataFile = "Level-02.plist"
+            GameConfiguration.levelGoal = 3
+        }
+        else if(gameData.level == 3)
+        {
+            GameConfiguration.VineDataFile = "Level-03.plist"
             GameConfiguration.levelGoal = 3
         }
         // 1 load vine data
@@ -201,6 +213,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if(gameData.level == 2)
         {
             crocodile.position = CGPoint(x: size.width*0.25, y: size.height*0.312)
+        }
+        else if(gameData.level == 3)
+        {
+            crocodile.position = CGPoint(x: size.width*0.95, y: size.height*0.312)
         }
         crocodile.zPosition = Layer.Crocodile
 
@@ -320,12 +336,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameData.score += 1
             scoreLabel.text = "Score: \(gameData.score)/\(GameConfiguration.levelGoal)"
             
-            if(gameData.score == 2)
+            if(gameData.level == 1)
             {
-                gameData.score = 0
-                gameData.lives = 3
-                gameData.level = 2
+                if(gameData.score == 2)
+                {
+                    gameData.score = 0
+                    gameData.lives = 3
+                    gameData.level = 2
+                }
             }
+            else if(gameData.level == 2)
+            {
+                if(gameData.score == 3)
+                {
+                    gameData.score = 0
+                    gameData.lives = 3
+                    gameData.level = 3
+                }
+            }
+            else if(gameData.level == 3)
+            {
+                if(gameData.score == 3)
+                {
+                    gameData.score = 0
+                    gameData.lives = 3
+                    gameData.level = 3
+                }
+            }
+            
             saveGameData(gameData: gameData)
             
             // transition to next level
@@ -469,6 +507,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         saveGameData(gameData: gameData)
         self.isPaused = false
         switchToNewGameWithTransition(SKTransition.fade(withDuration: 1.0))
+    }
+    
+    func gameCompleted()
+    {
+        gameCompletedText.isHidden = true
     }
     
     fileprivate func loadGameData() -> GameData {
